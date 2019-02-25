@@ -1,18 +1,19 @@
 
 public class solution {
 
-	public static boolean isStringPalindrome(String input)
+	public static int multiplyTwoIntegers(int m, int n)
     {
-      if(input.length()>1)
+      if(m==0||n==0)
       {
-		if(input.charAt(0)==input.charAt(input.length()-1))
-        {
-          return true&&isStringPalindrome(input.substring(1,input.length()-1));
-        }
-      else
-        return false;
+        return 0;
+      }
+      if(m>1)
+      {
+	   return n+multiplyTwoIntegers(n,--m);
       }
       else
-        return true;
+      {
+       return n;
+      }
 	}
 }
