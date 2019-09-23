@@ -12,15 +12,16 @@ public class MinimumAverageList {
 
         ArrayList<List> listOfArrays=new ArrayList<List>();
         AtomicInteger previousIndex= new AtomicInteger();
-        previousIndex.set(0);
 
         arrayList.forEach((element) -> {if ((Integer)element%2!=0) {
 
+            if (arrayList.subList(previousIndex.get(),arrayList.indexOf(element)).size()>0)
             listOfArrays.add(arrayList.subList(previousIndex.get(),arrayList.indexOf(element)));
             previousIndex.set(arrayList.indexOf(element)+1);
 
         }});
 
+        if (previousIndex.get()!=arrayList.size())
         listOfArrays.add(arrayList.subList(previousIndex.get(),arrayList.size()-1));
 
         return listOfArrays;
@@ -35,12 +36,16 @@ public class MinimumAverageList {
 
         for (List list:sublist) {
             list.sort(Comparator.naturalOrder());
+
+            if (list.size()==0)
+                continue;
+
             minimumSum+=(int)list.get(0);
         }
 
-        int minimumAverage=minimumSum/subListSize;
 
-        return minimumAverage;
+        return ( (minimumSum==0) ? 0 : minimumSum/subListSize );
+
     }
     public static void main(String[] args) {
 
@@ -59,7 +64,7 @@ public class MinimumAverageList {
 
         }
 
-        System.out.println("Average of minimums is:"+minimumAverage(arrayList));
+        System.out.println("Average of minimums is: "+minimumAverage(arrayList));
 
     }
 
